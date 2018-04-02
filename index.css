@@ -1,0 +1,105 @@
+body{
+  box-sizing: content-box;
+}
+.page{
+  padding: .5rem;
+}
+.page>div:nth-child(1){
+  flex: none;
+  font-size: 24px;
+  padding: .5rem;
+}
+.page>div:nth-child(2){
+  flex: auto;
+  font-size: 24px;
+  border:1px dashed #ccc;
+  padding: .5rem;
+}
+button{
+  padding: .8rem;
+  border: 1px solid #fff;
+  background: #4c9ef1;
+  border-radius: 6px;
+  outline: none;
+}
+.cnt>*{
+  flex: auto;
+}
+#takePhotoCanvas{
+  width: 100%;
+  height: 100%;
+}
+#video2{
+  width: 100%;
+  height: 100%;
+}
+@media screen and (orientation: portrait) {
+  .page,.btnBlock{
+    display: flex;
+    flex-direction: column;
+  }
+  .page>div{
+    font-size: 32px;
+  }
+  .btnBlock{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+  }
+  .cnt{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+  }
+  .photoBlock, #video{
+    height: 46%;
+    width: 100%;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .page{
+    display: flex;
+    flex-direction: row;
+  }
+  .btnBlock{
+    display: flex;
+    flex-direction: column;
+    width:8rem;
+    align-items:center;
+  }
+  .cnt{
+    display: flex;
+    flex-direction: row;
+    width:8rem;
+    align-items:center;
+  }
+  button{
+    width: 100%;
+  }
+  .photoBlock, #video{
+    width: 46%;
+    height: 100%;
+  }
+}
+.status{
+  border: 1px solid yellowgreen;
+  background:green;
+  border-radius: .5rem;
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-left: 1rem;
+}
+.status-d{
+  border: 1px solid rebeccapurple;
+  background:red;
+  border-radius: .5rem;
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-left: 1rem;
+}
+.status-dis{
+  background: #ccc;
+}
