@@ -67,19 +67,20 @@
         let self = this;
         self.vOrP = 'v';
         self.recorder = new MediaRecorder(self.stream, {
-          mimeType: 'audio/webm'
+          mimeType: 'audio/webm;'
         });
         self.recorder.start();
         self.recorder.ondataavailable = e => {
           self.chunks.push(e.data);
           if (self.recorder.state == 'inactive') {
             let blob = new Blob(self.chunks, {
-              type: 'audio/pcm'
+              type: 'audio/mp3',
+              audioBitsPerSecond : 16000,
             });
-            var audioURL = window.URL.createObjectURL(blob);
-            axios.post('/media', {
-                audio: audioURL
-              })
+            var file = new File([blob], 'test.mp3', {type: 'audio/mp3', lastModified: Date.now()});
+            var data = new FormData();
+            data.append('mp3', file);
+            axios.post('/media', data, {headers: { 'content-type': 'multipart/form-data' }})
               .then(function (response) {
                 console.log(response);
               })
@@ -90,7 +91,7 @@
         };
         setTimeout(() => {
           self.recorder.stop();
-        }, 3000);
+        }, 2000);
       }
     },
     watch: {
