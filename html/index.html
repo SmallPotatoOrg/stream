@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="./vue.min.js"></script>
   <script src="./lodash.min.js"></script>
   <link rel="stylesheet" href="index.css">
@@ -73,17 +74,23 @@
           self.chunks.push(e.data);
           if (self.recorder.state == 'inactive') {
             let blob = new Blob(self.chunks, {
-                type: 'audio/webm'
-              }),
-              url = URL.createObjectURL(blob);
-            document.querySelector('#video2').src = url;
-            document.querySelector('#download').href = url;
-            document.querySelector('#download').download = 'audio.mp3';
+              type: 'audio/pcm'
+            });
+            var audioURL = window.URL.createObjectURL(blob);
+            axios.post('/media', {
+                audio: audioURL
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
           };
         };
         setTimeout(() => {
           self.recorder.stop();
-        }, 10000);
+        }, 3000);
       }
     },
     watch: {
